@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { cn } from '$lib/utils';
 	import Tag from './Tag.svelte';
 	import Meter from './Meter.svelte';
+	import { isHighlighted } from '$lib/highlightStore.svelte';
 	
-	interface InventoryItem {
+	export interface DataTableItem {
 		id: string;
 		sku: string;
 		name: string;
@@ -13,14 +15,19 @@
 		price: number;
 	}
 	
+	export interface DataTableProps {
+		items?: DataTableItem[];
+		selectedIds?: string[];
+		class?: string;
+	}
+	
 	let { 
 		items = [],
-		selectedIds = $bindable<string[]>([])
-	}: { 
-		items: InventoryItem[];
-		selectedIds: string[];
-	} = $props();
+		selectedIds = $bindable<string[]>([]),
+		class: className
+	}: DataTableProps = $props();
 
+	let highlighted = $derived(isHighlighted('datagrid'));
 	let allSelected = $derived(items.length > 0 && selectedIds.length === items.length);
 
 	function toggleAll() {
@@ -48,7 +55,13 @@
 	}
 </script>
 
-<div class="overflow-x-auto">
+<div 
+	class={cn(
+		"overflow-x-auto transition-all duration-200 rounded-sm",
+		highlighted && "ring-2 ring-signal ring-offset-2",
+		className
+	)}
+>
 	<table class="w-full border-collapse border border-stone-300 text-sm">
 		<thead>
 			<tr class="bg-[#E6E6E2]">
@@ -62,7 +75,6 @@
 				</th>
 				<th class="py-2 px-3 border border-stone-300 text-left text-[10px] font-bold uppercase tracking-wider text-matte/70">SKU</th>
 				<th class="py-2 px-3 border border-stone-300 text-left text-[10px] font-bold uppercase tracking-wider text-matte/70">Product Name</th>
-				<th class="py-2 px-3 border border-stone-300 text-left text-[10px] font-bold uppercase tracking-wider text-matte/70">Category</th>
 				<th class="py-2 px-3 border border-stone-300 text-left text-[10px] font-bold uppercase tracking-wider text-matte/70 w-32">Stock Level</th>
 				<th class="py-2 px-3 border border-stone-300 text-center text-[10px] font-bold uppercase tracking-wider text-matte/70">Status</th>
 				<th class="py-2 px-3 border border-stone-300 text-right text-[10px] font-bold uppercase tracking-wider text-matte/70">Price</th>
@@ -80,10 +92,9 @@
 						/>
 					</td>
 					<td class="py-2 px-3 border border-stone-300 font-mono text-xs text-matte/80">{item.sku}</td>
-					<td class="py-2 px-3 border border-stone-300 font-sans text-matte">{item.name}</td>
-					<td class="py-2 px-3 border border-stone-300 font-mono text-[10px] uppercase text-matte/60">{item.category}</td>
+					<td class="py-2 px-3 border border-stone-300 font-sans text-xs text-matte">{item.name}</td>
 					<td class="py-2 px-3 border border-stone-300">
-						<Meter label="" value={getStockPercentage(item.stock, item.maxStock)} compact={true} />
+						<Meter value={getStockPercentage(item.stock, item.maxStock)} compact={true} />
 					</td>
 					<td class="py-2 px-3 border border-stone-300 text-center">
 						<Tag variant={item.status} label={item.status.replace('-', ' ')} />
