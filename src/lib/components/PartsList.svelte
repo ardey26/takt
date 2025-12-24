@@ -18,14 +18,16 @@
 			name: 'DataTable', 
 			desc: 'Data table with grid borders',
 			importSnippet: `import DataTable from '$lib/components/DataTable.svelte';`,
-			usageSnippet: `<DataTable items={data} bind:selectedIds />`
+			usageSnippet: `<DataTable items={data} bind:selectedIds />`,
+			children: ['Meter', 'Tag', 'Checkbox']
 		},
 		{ 
 			id: 'controlstrip', 
 			name: 'Toolbar', 
 			desc: 'Search, filter, and actions',
 			importSnippet: `import Toolbar from '$lib/components/Toolbar.svelte';`,
-			usageSnippet: `<Toolbar bind:searchValue bind:categoryValue {categories} onadd={handleAdd} />`
+			usageSnippet: `<Toolbar bind:searchValue bind:categoryValue {categories} onadd={handleAdd} />`,
+			children: ['Input', 'Select', 'Button']
 		},
 		{ 
 			id: 'meter', 
@@ -168,6 +170,15 @@
 				<p class="font-mono text-[9px] text-matte/40 mt-0.5 ml-6">
 					{part.desc}
 				</p>
+				{#if part.children}
+					<div class="ml-6 mt-1 flex flex-wrap gap-1">
+						{#each part.children as child}
+							<span class="font-mono text-[8px] text-matte/30 bg-stone-200/50 px-1.5 py-0.5 rounded">
+								{child}
+							</span>
+						{/each}
+					</div>
+				{/if}
 				<!-- Copy icon hint -->
 				<svg 
 					class="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-matte/20 opacity-0 group-hover:opacity-100 transition-opacity" 
