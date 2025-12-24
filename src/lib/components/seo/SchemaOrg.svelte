@@ -4,8 +4,6 @@
 	}
 	
 	let { schema }: Props = $props();
-	
-	// Handle both single schema and array of schemas
 	let schemas = $derived(Array.isArray(schema) ? schema : [schema]);
 </script>
 
