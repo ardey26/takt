@@ -1,101 +1,85 @@
 <script lang="ts">
-	import Meter from '$lib/components/Meter.svelte';
-	import Toggle from '$lib/components/Toggle.svelte';
-	import Panel from '$lib/components/Panel.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import DataTable from '$lib/components/DataTable.svelte';
+	import Toolbar from '$lib/components/Toolbar.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
+	import PartsList from '$lib/components/PartsList.svelte';
 
-	let coolingEnabled = $state(false);
-	let powerEnabled = $state(true);
-	let lockEnabled = $state(false);
+	import { isHighlighted } from '$lib/highlightStore.svelte';
 
-	let cpuValue = $state(67);
-	let ramValue = $state(45);
-	let heatValue = $derived(coolingEnabled ? 22 : 71);
+	let searchValue = $state('');
+	let categoryValue = $state('all');
+	let currentPage = $state(1);
+	let selectedIds = $state<string[]>([]);
 
-	let logs = $state([
-		'[00:00:01] Initializing kernel...',
-		'[00:00:02] Loading system modules',
-		'[00:00:03] Buffer allocation: 2048MB',
-		'[00:00:04] Network stack ready',
-		'[00:00:05] Thermal sensors online',
-		'[00:00:06] System ready',
-	]);
+	const inventoryData = [
+		{ id: '1', sku: 'MB-2048', name: 'Modular Bracket Assembly', category: 'hardware', stock: 156, maxStock: 200, status: 'in-stock' as const, price: 24.99 },
+		{ id: '2', sku: 'SM-9000', name: 'Servo Motor 9000 Series', category: 'electronics', stock: 12, maxStock: 50, status: 'low-stock' as const, price: 189.50 },
+		{ id: '3', sku: 'CB-CAT6', name: 'Industrial CAT6 Cable (100m)', category: 'cables', stock: 89, maxStock: 100, status: 'in-stock' as const, price: 75.00 },
+		{ id: '4', sku: 'PS-750W', name: 'Power Supply Unit 750W', category: 'electronics', stock: 8, maxStock: 40, status: 'low-stock' as const, price: 145.00 },
+		{ id: '5', sku: 'AL-FRAME', name: 'Aluminum Extrusion Frame', category: 'mechanical', stock: 234, maxStock: 250, status: 'in-stock' as const, price: 56.25 },
+		{ id: '6', sku: 'SN-TEMP', name: 'Temperature Sensor Module', category: 'electronics', stock: 0, maxStock: 100, status: 'out-of-stock' as const, price: 32.00 },
+		{ id: '7', sku: 'BT-M8X20', name: 'Stainless Steel Bolt M8x20', category: 'hardware', stock: 1500, maxStock: 2000, status: 'in-stock' as const, price: 0.45 },
+		{ id: '8', sku: 'PB-CTRL', name: 'Programmable Logic Controller', category: 'electronics', stock: 5, maxStock: 25, status: 'low-stock' as const, price: 420.00 },
+	];
 
-	let deployed = $state(false);
+	const categories = ['all', 'electronics', 'mechanical', 'cables', 'hardware'];
 
-	function handleDeploy() {
-		deployed = true;
-		logs = [...logs, `[${new Date().toLocaleTimeString()}] DEPLOY initiated`];
-		logs = [...logs, `[${new Date().toLocaleTimeString()}] Building artifacts...`];
-		setTimeout(() => {
-			logs = [...logs, `[${new Date().toLocaleTimeString()}] Deploy successful`];
-		}, 1500);
+	let filteredData = $derived(
+		inventoryData.filter(item => {
+			const matchesSearch = item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+				item.sku.toLowerCase().includes(searchValue.toLowerCase());
+			const matchesCategory = categoryValue === 'all' || item.category === categoryValue;
+			return matchesSearch && matchesCategory;
+		})
+	);
+
+	function handleAdd() {
+		alert('Add Item dialog would open here');
 	}
-
-	$effect(() => {
-		const interval = setInterval(() => {
-			cpuValue = Math.max(20, Math.min(95, cpuValue + (Math.random() - 0.5) * 10));
-			ramValue = Math.max(30, Math.min(80, ramValue + (Math.random() - 0.5) * 5));
-		}, 2000);
-		return () => clearInterval(interval);
-	});
 </script>
 
 <svelte:head>
-	<title>MAINFRAME CONTROL 01 | System Monitor</title>
-	<meta name="description" content="Industrial-grade system monitor dashboard. A Dieter Rams-inspired component library for Svelte." />
+	<title>Takt · Showroom 01: Logistics</title>
+	<meta name="description" content="High-end Svelte component library inspired by Dieter Rams. Showroom 01 demonstrates a logistics dashboard." />
 </svelte:head>
 
-<main class="min-h-screen chassis p-6 md:p-10">
-	<div class="max-w-4xl mx-auto">
-		<header class="flex items-center justify-between mb-8">
-			<div>
-				<h1 class="font-mono text-lg font-semibold tracking-tight text-matte">MAINFRAME CONTROL 01</h1>
-				<p class="font-mono text-[10px] tracking-[0.2em] text-matte/50 uppercase mt-0.5">System Monitor Dashboard</p>
-			</div>
+<div class="min-h-screen flex">
+	<!-- Main Stage -->
+	<main class="flex-1 chassis p-6">
+		<!-- Header -->
+		<header class="mb-6">
+			<p class="font-mono text-[10px] tracking-[0.3em] text-matte/40 uppercase mb-1">
+				Showroom 01
+			</p>
+			<h1 class="font-mono text-xl font-bold tracking-tight text-matte">
+				Global Inventory
+			</h1>
 		</header>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-			<section class="p-5 border border-stone-300 rounded-sm bg-bone/50">
-				<h2 class="font-mono text-[10px] font-medium tracking-[0.3em] text-matte/40 uppercase mb-4">VITALS</h2>
-				<div class="flex flex-col gap-4">
-					<Meter label="CPU" value={cpuValue} />
-					<Meter label="RAM" value={ramValue} />
-					<Meter label="HEAT" value={heatValue} variant="heat" />
-				</div>
-			</section>
-
-			<section class="p-5 border border-stone-300 rounded-sm bg-bone/50">
-				<h2 class="font-mono text-[10px] font-medium tracking-[0.3em] text-matte/40 uppercase mb-4">OVERRIDE</h2>
-				<div class="flex flex-col gap-3">
-					<Toggle label="COOLING" bind:checked={coolingEnabled} />
-					<Toggle label="POWER" bind:checked={powerEnabled} />
-					<Toggle label="LOCK" bind:checked={lockEnabled} />
-				</div>
-			</section>
-
-			<section class="p-5 border border-stone-300 rounded-sm bg-bone/50">
-				<h2 class="font-mono text-[10px] font-medium tracking-[0.3em] text-matte/40 uppercase mb-4">LOG</h2>
-				<Panel label="SYSTEM OUTPUT">
-					{#each logs as log}
-						<div class="text-[11px] leading-5">{log}</div>
-					{/each}
-				</Panel>
-			</section>
-
-			<section class="p-5 border border-stone-300 rounded-sm bg-bone/50 flex flex-col items-center justify-center">
-				<h2 class="font-mono text-[10px] font-medium tracking-[0.3em] text-matte/40 uppercase mb-6">TRIGGER</h2>
-				<Button label="DEPLOY" onclick={handleDeploy} />
-				{#if deployed}
-					<p class="font-mono text-[10px] text-signal mt-4 tracking-wider">DEPLOYMENT ACTIVE</p>
-				{/if}
-			</section>
+		<!-- Control Strip -->
+		<div class="mb-4">
+			<Toolbar 
+				bind:searchValue 
+				bind:categoryValue 
+				{categories}
+				onadd={handleAdd}
+			/>
 		</div>
 
-		<footer class="mt-10 pt-6 border-t border-stone-200">
-			<p class="font-mono text-[9px] tracking-[0.15em] text-matte/30 uppercase text-center">
-				Andeus UI · Industrial Component Library · Less but better
+		<!-- Datagrid -->
+		<div class="bg-bone/50 border border-stone-300 rounded-sm mb-4 transition-all duration-200 {isHighlighted('datagrid') ? 'ring-2 ring-signal ring-offset-2' : ''}">
+			<DataTable items={filteredData} bind:selectedIds />
+		</div>
+
+		<!-- Footer -->
+		<div class="flex items-center justify-between">
+			<p class="font-mono text-[10px] text-matte/40 uppercase tracking-wider">
+				{selectedIds.length > 0 ? `${selectedIds.length} selected` : `${filteredData.length} items`}
 			</p>
-		</footer>
-	</div>
-</main>
+			<Pagination bind:currentPage totalPages={50} />
+		</div>
+	</main>
+
+	<!-- Parts List Sidebar -->
+	<PartsList />
+</div>
