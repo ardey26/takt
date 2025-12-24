@@ -53,7 +53,7 @@
 			<div 
 				class={cn(
 					"rounded-[1px] transition-colors duration-100",
-					compact ? "w-2 h-3" : "w-4 h-5",
+					compact ? "w-2 h-3" : "w-3 h-4 sm:w-4 sm:h-5",
 					variant === 'normal' && i < segments && "bg-led-on",
 					variant === 'heat' && i < segments && "bg-led-hot",
 					i >= segments && "bg-led-off"

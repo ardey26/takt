@@ -64,7 +64,7 @@
 
 <section class="h-[80vh] chassis flex flex-col items-center justify-center relative px-4">
 	<Panel class="mb-10">
-		<div class="flex flex-col gap-6 p-6">
+		<div class="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6">
 			<div class="text-center mb-2">
 				<p class="font-mono text-[10px] tracking-[0.3em] text-matte/40 uppercase mb-1">
 					System Monitor
