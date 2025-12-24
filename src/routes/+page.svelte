@@ -15,10 +15,15 @@
 		'logistics': 'Logistics',
 		'ledger': 'Ledger',
 		'settings': 'Switchboard',
-		'devops': 'DevOps'
+		'devops': 'DevOps',
+		'typewriter': 'Typewriter'
 	};
 
 	function handleModeChange(mode: string) {
+		if (mode === 'typewriter') {
+			goto('/typewriter');
+			return;
+		}
 		const url = new URL(window.location.href);
 		url.searchParams.set('mode', mode);
 		goto(url.pathname + url.search, { replaceState: true });

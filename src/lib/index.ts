@@ -1,7 +1,3 @@
-// Takt Component Library
-// High-end Svelte components inspired by Dieter Rams
-
-// Components
 export { default as Button } from './components/Button.svelte';
 export { default as Meter } from './components/Meter.svelte';
 export { default as Toggle } from './components/Toggle.svelte';
@@ -15,6 +11,13 @@ export { default as Avatar } from './components/Avatar.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Select } from './components/Select.svelte';
 export { default as Divider } from './components/Divider.svelte';
+export { default as Ticker } from './components/Ticker.svelte';
+export { default as Plot } from './components/Plot.svelte';
+export { default as PeriodSelector } from './components/PeriodSelector.svelte';
+export { default as Modal } from './components/Modal.svelte';
+export { default as Rocker } from './components/Rocker.svelte';
+export { default as Surface } from './components/Surface.svelte';
+export { default as ModeSelector } from './components/ModeSelector.svelte';
 
 export type { ButtonProps } from './components/Button.svelte';
 export type { MeterProps } from './components/Meter.svelte';
@@ -24,6 +27,10 @@ export type { TagProps } from './components/Tag.svelte';
 export type { ToolbarProps } from './components/Toolbar.svelte';
 export type { DataTableProps, DataTableItem } from './components/DataTable.svelte';
 export type { PaginationProps } from './components/Pagination.svelte';
+export type { ModalProps } from './components/Modal.svelte';
+export type { RockerProps, RockerOption } from './components/Rocker.svelte';
+export type { SurfaceProps } from './components/Surface.svelte';
 
-// Utilities
 export { cn } from './utils';
+
+
