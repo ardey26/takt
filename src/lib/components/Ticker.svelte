@@ -43,25 +43,23 @@
 		</p>
 	{/if}
 	
-	<div class="flex items-baseline gap-2">
-		<span 
+	<p 
+		class={cn(
+			"font-mono text-2xl font-bold tracking-tight tabular-nums",
+			value < 0 ? "text-red-600" : "text-matte"
+		)}
+	>
+		{value < 0 ? '-' : ''}{prefix}{formattedValue}{suffix}
+	</p>
+	
+	{#if change !== 0}
+		<p 
 			class={cn(
-				"font-mono text-2xl font-bold tracking-tight tabular-nums",
-				value < 0 ? "text-red-600" : "text-matte"
+				"font-mono text-xs tabular-nums mt-1",
+				isPositive ? "text-matte/50" : "text-red-600"
 			)}
 		>
-			{value < 0 ? '-' : ''}{prefix}{formattedValue}{suffix}
-		</span>
-		
-		{#if change !== 0}
-			<span 
-				class={cn(
-					"font-mono text-xs tabular-nums",
-					isPositive ? "text-matte/50" : "text-red-600"
-				)}
-			>
-				{formattedChange}
-			</span>
-		{/if}
-	</div>
+			{formattedChange}
+		</p>
+	{/if}
 </div>
