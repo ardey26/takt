@@ -12,8 +12,10 @@ export { default as DataTable } from './components/DataTable.svelte';
 export { default as Pagination } from './components/Pagination.svelte';
 export { default as PartsList } from './components/PartsList.svelte';
 export { default as Avatar } from './components/Avatar.svelte';
+export { default as Input } from './components/Input.svelte';
+export { default as Select } from './components/Select.svelte';
+export { default as Divider } from './components/Divider.svelte';
 
-// Types (re-exported from components)
 export type { ButtonProps } from './components/Button.svelte';
 export type { MeterProps } from './components/Meter.svelte';
 export type { ToggleProps } from './components/Toggle.svelte';

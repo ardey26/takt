@@ -6,6 +6,7 @@
 	import Meter from '$lib/components/Meter.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Panel from '$lib/components/Panel.svelte';
+	import Divider from '$lib/components/Divider.svelte';
 
 	import { isHighlighted } from '$lib/highlightStore.svelte';
 
@@ -98,11 +99,7 @@
 	</div>
 </section>
 
-<div class="chassis border-t border-stone-300 py-3">
-	<p class="font-mono text-[10px] tracking-[0.3em] text-matte/30 uppercase text-center">
-		// System Modules
-	</p>
-</div>
+<Divider text="// System Modules" />
 
 <section bind:this={demoSection} class="min-h-screen flex flex-col lg:flex-row">
 	<main class="flex-1 chassis p-4 sm:p-6">
