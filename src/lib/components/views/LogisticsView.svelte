@@ -21,7 +21,7 @@
 		const interval = setInterval(() => {
 			cpuValue = Math.floor(Math.random() * 40) + 30;
 			ramValue = Math.floor(Math.random() * 50) + 40;
-		}, 500);
+		}, 2000);
 		return () => clearInterval(interval);
 	});
 

@@ -4,6 +4,8 @@
 	import Divider from '$lib/components/Divider.svelte';
 	import PartsList from '$lib/components/PartsList.svelte';
 
+	import { isHighlighted } from '$lib/highlightStore.svelte';
+
 	let darkMode = $state(false);
 	let notifications = $state(true);
 	let compactView = $state(false);
@@ -24,13 +26,7 @@
 			importSnippet: `import Panel from '$lib/components/Panel.svelte';`,
 			usageSnippet: `<Panel>Content here</Panel>`
 		},
-		{ 
-			id: 'divider', 
-			name: 'Divider', 
-			desc: 'Section separator',
-			importSnippet: `import Divider from '$lib/components/Divider.svelte';`,
-			usageSnippet: `<Divider text="// Section" />`
-		},
+
 	];
 </script>
 
@@ -54,7 +50,7 @@
 
 <section class="min-h-screen flex flex-col lg:flex-row">
 	<main class="flex-1 chassis p-4 sm:p-6">
-		<div class="max-w-md mx-auto space-y-4">
+		<div class="max-w-md mx-auto space-y-4 transition-all duration-200 {isHighlighted('toggle') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
 			<div class="flex items-center justify-between p-4 bg-bone/50 border border-stone-300 rounded-sm">
 				<div>
 					<p class="font-mono text-xs font-medium text-matte">Dark Mode</p>

@@ -6,6 +6,8 @@
 	import Divider from '$lib/components/Divider.svelte';
 	import PartsList from '$lib/components/PartsList.svelte';
 
+	import { isHighlighted } from '$lib/highlightStore.svelte';
+
 	let selectedPeriod = $state('1D');
 
 	const metrics = [
@@ -67,14 +69,7 @@
 			desc: 'Content container',
 			importSnippet: `import Panel from '$lib/components/Panel.svelte';`,
 			usageSnippet: `<Panel>Content here</Panel>`
-		},
-		{ 
-			id: 'divider', 
-			name: 'Divider', 
-			desc: 'Section separator',
-			importSnippet: `import Divider from '$lib/components/Divider.svelte';`,
-			usageSnippet: `<Divider text="// Section" />`
-		},
+		}
 	];
 </script>
 
@@ -98,7 +93,7 @@
 
 <section class="min-h-screen flex flex-col lg:flex-row">
 	<main class="flex-1 chassis p-4 sm:p-6">
-		<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+		<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8 transition-all duration-200 {isHighlighted('ticker') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
 			{#each metrics as metric}
 				<Ticker 
 					value={metric.value}
@@ -118,10 +113,12 @@
 					Daily Performance
 				</h2>
 			</div>
-			<PeriodSelector bind:value={selectedPeriod} />
+			<div class="transition-all duration-200 {isHighlighted('period') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
+				<PeriodSelector bind:value={selectedPeriod} />
+			</div>
 		</div>
 
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8 transition-all duration-200 {isHighlighted('plot') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
 			<div>
 				<p class="font-mono text-[9px] text-matte/40 uppercase tracking-wider mb-2">
 					% Change
@@ -136,7 +133,7 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="transition-all duration-200 {isHighlighted('panel') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
 			<p class="font-mono text-[10px] tracking-[0.3em] text-matte/40 uppercase mb-3">
 				Positions
 			</p>

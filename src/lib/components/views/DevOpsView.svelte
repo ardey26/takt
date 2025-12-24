@@ -4,6 +4,8 @@
 	import Divider from '$lib/components/Divider.svelte';
 	import PartsList from '$lib/components/PartsList.svelte';
 
+	import { isHighlighted } from '$lib/highlightStore.svelte';
+
 	let cpuLoad = $state(42);
 	let memoryUsage = $state(67);
 	let diskUsage = $state(34);
@@ -15,7 +17,7 @@
 			memoryUsage = Math.floor(Math.random() * 30) + 50;
 			diskUsage = Math.floor(Math.random() * 20) + 25;
 			networkIO = Math.floor(Math.random() * 40) + 10;
-		}, 1000);
+		}, 2000);
 		return () => clearInterval(interval);
 	});
 
@@ -65,7 +67,7 @@
 <section class="min-h-screen flex flex-col lg:flex-row">
 	<main class="flex-1 chassis p-4 sm:p-6">
 		<div class="max-w-2xl mx-auto">
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 transition-all duration-200 {isHighlighted('meter') ? 'ring-2 ring-signal ring-offset-2 rounded-sm' : ''}">
 				<div class="p-4 bg-bone/50 border border-stone-300 rounded-sm">
 					<p class="font-mono text-[10px] text-matte/40 uppercase tracking-wider mb-3">CPU Load</p>
 					<Meter value={cpuLoad} label="" />
