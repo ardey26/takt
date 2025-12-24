@@ -120,7 +120,7 @@
 		</div>
 	</main>
 
-	<div class="absolute h-screen right-0">
+	<div class="absolute md:block hidden h-screen right-0">
 		<PartsList {parts} showroomNumber="04" showroomName="DevOps" class="h-full overflow-y-auto" />
 	</div>
 </section>
