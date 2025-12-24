@@ -62,7 +62,7 @@
 		className
 	)}
 >
-	<table class="w-full border-collapse border border-stone-300 text-sm">
+	<table class="w-full border-collapse border border-stone-300 text-sm whitespace-nowrap">
 		<thead>
 			<tr class="bg-[#E6E6E2]">
 				<th class="w-10 py-2 px-3 border border-stone-300 text-center">
