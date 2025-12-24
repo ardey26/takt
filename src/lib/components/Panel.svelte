@@ -17,7 +17,7 @@
 
 <div class={cn("flex flex-col gap-1.5", className)}>
 	<span class="text-[10px] font-mono font-medium tracking-[0.2em] text-matte/60 uppercase">{label}</span>
-	<div class="slot rounded-sm p-3 h-40 overflow-y-auto font-mono text-xs text-matte/80 leading-relaxed">
+	<div class="slot rounded-sm p-3 font-mono text-xs text-matte/80 leading-relaxed">
 		{@render children()}
 	</div>
 </div>
