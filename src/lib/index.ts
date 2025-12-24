@@ -15,6 +15,9 @@ export { default as Avatar } from './components/Avatar.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Select } from './components/Select.svelte';
 export { default as Divider } from './components/Divider.svelte';
+export { default as Ticker } from './components/Ticker.svelte';
+export { default as Plot } from './components/Plot.svelte';
+export { default as PeriodSelector } from './components/PeriodSelector.svelte';
 
 export type { ButtonProps } from './components/Button.svelte';
 export type { MeterProps } from './components/Meter.svelte';
