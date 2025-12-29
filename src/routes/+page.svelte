@@ -3,6 +3,9 @@
 	import { generateSoftwareSchema } from '$lib/utils/generateMeta';
 	import { componentRegistry } from '$lib/data/componentRegistry';
 	import ComponentPreview from '$lib/components/ComponentPreview.svelte';
+	import Heading from '$lib/components/Heading.svelte';
+	import Text from '$lib/components/Text.svelte';	
+	import Link from '$lib/components/Link.svelte';
 	
 	const softwareSchema = generateSoftwareSchema();
 </script>
@@ -22,18 +25,18 @@
 	<header class="border-b border-stone-300">
 		<div class="max-w-5xl mx-auto px-6 py-12 md:py-16">
 			<div class="flex items-center gap-2 mb-4">
-				<span class="font-mono text-[10px] text-matte/40 uppercase tracking-[0.2em]">Svelte 5</span>
+				<Text variant="precise" as="span" class="text-[10px] text-matte/40 uppercase tracking-[0.2em]">Svelte 5</Text>
 				<span class="w-1 h-1 rounded-full bg-matte/20"></span>
-				<span class="font-mono text-[10px] text-matte/40 uppercase tracking-[0.2em]">Open Source</span>
+				<Text variant="precise" as="span" class="text-[10px] text-matte/40 uppercase tracking-[0.2em]">Open Source</Text>
 			</div>
 			
-			<h1 class="text-3xl md:text-4xl font-bold text-matte tracking-tight mb-3">
+			<Heading level={1} class="text-3xl md:text-4xl mb-3">
 				Takt
-			</h1>
-			<p class="font-mono text-sm text-matte/60 max-w-lg mb-6">
+			</Heading>
+			<Text variant="muted" class="max-w-lg mb-6">
 				Industrial UI components inspired by Dieter Rams.<br/>
 				Less, but better.
-			</p>
+			</Text>
 			
 			<div class="flex gap-3">
 				<a 
@@ -54,12 +57,12 @@
 
 	<main class="max-w-5xl mx-auto px-6 py-12">
 		<div class="flex items-baseline justify-between mb-6">
-			<h2 class="font-mono text-[10px] font-medium tracking-[0.2em] text-matte/60 uppercase">
+			<Text variant="precise" as="span" class="text-[10px] font-medium tracking-[0.2em] text-matte/60 uppercase">
 				Component Index
-			</h2>
-			<span class="font-mono text-[10px] text-matte/30">
+			</Text>
+			<Text variant="precise" as="span" class="text-[10px] text-matte/30">
 				{componentRegistry.length} components
-			</span>
+			</Text>
 		</div>
 
 		<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-stone-300">
@@ -70,12 +73,12 @@
 				>
 					<ComponentPreview slug={component.slug} name={component.name} class="flex-1 mb-3" />
 					
-					<span class="font-mono text-xs text-matte group-hover:text-signal transition-colors">
+					<Text variant="precise" as="span" class="text-xs text-matte group-hover:text-signal transition-colors">
 						{component.name}
-					</span>
-					<span class="font-mono text-[9px] text-matte/40 capitalize">
+					</Text>
+					<Text variant="precise" as="span" class="text-[9px] text-matte/40 capitalize">
 						{component.category.replace('-', ' ')}
-					</span>
+					</Text>
 				</a>
 			{/each}
 		</div>
@@ -84,13 +87,13 @@
 	<footer class="border-t border-stone-300 bg-[#EAEAE6]">
 		<div class="max-w-5xl mx-auto px-6 py-6">
 			<div class="flex items-center justify-between">
-				<span class="font-mono text-[10px] text-matte/40">
+				<Text variant="precise" as="span" class="text-[10px] text-matte/40">
 					Takt · MIT License
-				</span>
+				</Text>
 				<div class="flex gap-4">
-					<a href="/components" class="font-mono text-[10px] text-matte/40 hover:text-matte transition-colors">Docs</a>
-					<a href="/showroom" class="font-mono text-[10px] text-matte/40 hover:text-matte transition-colors">Showroom</a>
-					<a href="https://github.com/ardey26/takt" class="font-mono text-[10px] text-matte/40 hover:text-matte transition-colors">GitHub</a>
+					<Link href="/components" class="text-[10px] text-matte/40 hover:text-matte no-underline">Docs</Link>
+					<Link href="/showroom" class="text-[10px] text-matte/40 hover:text-matte no-underline">Showroom</Link>
+					<Link href="https://github.com/ardey26/takt" class="text-[10px] text-matte/40 hover:text-matte no-underline">GitHub</Link>
 				</div>
 			</div>
 		</div>

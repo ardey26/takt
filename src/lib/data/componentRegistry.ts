@@ -307,6 +307,317 @@ export const componentRegistry: ComponentMeta[] = [
 		],
 		relatedComponents: ['Plot', 'Toolbar'],
 		showroomMode: 'ledger'
+	},
+	{
+		name: 'Heading',
+		slug: 'heading',
+		category: 'data-display',
+		title: 'Svelte 5 Heading – Typographic Hierarchy',
+		description: 'Semantic heading component with strict typographic scale. Ensures accessible hierarchy h1-h6.',
+		useCase: 'Enforces the design system typographic scale across the dashboard.',
+		keywords: ['typography', 'heading', 'svelte component'],
+		props: [
+			{ name: 'level', type: "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'", default: "'h1'", description: 'Heading level' },
+			{ name: 'children', type: 'Snippet', description: 'Heading content' }
+		],
+		relatedComponents: ['Text'],
+		showroomMode: 'logistics'
+	},
+	{
+		name: 'Text',
+		slug: 'text',
+		category: 'data-display',
+		title: 'Svelte 5 Text – Body Typography',
+		description: 'Polymorphic text component for body copy, labels, and muted text.',
+		useCase: 'Standardizes body text styles including precise monospace numbers and muted variants.',
+		keywords: ['typography', 'text', 'paragraph'],
+		props: [
+			{ name: 'variant', type: "'body' | 'muted' | 'signal' | 'precise'", default: "'body'", description: 'Text style variant' },
+			{ name: 'as', type: "'p' | 'span' | 'div' | 'label'", default: "'p'", description: 'HTML element' }
+		],
+		relatedComponents: ['Heading', 'Link'],
+		showroomMode: 'logistics'
+	},
+	{
+		name: 'Link',
+		slug: 'link',
+		category: 'data-display',
+		title: 'Svelte 5 Link – Hyperlink',
+		description: 'Styled anchor tag for navigation links.',
+		useCase: 'Standard link styling with hover effects.',
+		keywords: ['navigation', 'link', 'anchor'],
+		props: [
+			{ name: 'href', type: 'string', description: 'Destination URL' },
+			{ name: 'children', type: 'Snippet', description: 'Link text' }
+		],
+		relatedComponents: ['Text', 'Button'],
+		showroomMode: 'logistics'
+	},
+	{
+		name: 'Box',
+		slug: 'box',
+		category: 'layout',
+		title: 'Svelte 5 Box – Layout Primitive',
+		description: 'Low-level polymorphic layout container.',
+		useCase: 'Use for custom containers that need standard spacing or styling without semantic baggage.',
+		keywords: ['layout', 'div', 'container'],
+		props: [
+			{ name: 'as', type: 'string', default: "'div'", description: 'HTML tag' },
+			{ name: 'class', type: 'string', description: 'Tailwind classes' }
+		],
+		relatedComponents: ['Stack', 'Grid'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Stack',
+		slug: 'stack',
+		category: 'layout',
+		title: 'Svelte 5 Stack – Flex Layout',
+		description: 'Flexbox container for vertical or horizontal stacks with consistent spacing.',
+		useCase: 'Primary layout tool for arranging elements in a single direction.',
+		keywords: ['layout', 'flex', 'stack'],
+		props: [
+			{ name: 'direction', type: "'row' | 'col' | 'row-reverse' | 'col-reverse'", default: "'col'", description: 'Flex direction' },
+			{ name: 'gap', type: 'number', default: '2', description: 'Gap spacing (tailwind scale)' }
+		],
+		relatedComponents: ['Box', 'Grid'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Grid',
+		slug: 'grid',
+		category: 'layout',
+		title: 'Svelte 5 Grid – Grid Layout',
+		description: 'CSS Grid container for 2D layouts.',
+		useCase: 'Used for dashboards, card grids, and complex page layouts.',
+		keywords: ['layout', 'grid'],
+		props: [
+			{ name: 'cols', type: 'number', default: '1', description: 'Number of columns' },
+			{ name: 'gap', type: 'number', default: '4', description: 'Gap spacing' }
+		],
+		relatedComponents: ['Stack', 'Box'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Checkbox',
+		slug: 'checkbox',
+		category: 'inputs',
+		title: 'Svelte 5 Checkbox – Boolean Input',
+		description: 'Industrial style checkbox with distinct checked state.',
+		useCase: 'Selection of individual options or boolean settings.',
+		keywords: ['form', 'input', 'checkbox'],
+		props: [
+			{ name: 'checked', type: 'boolean', default: 'false', description: 'Bindable checked state' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disabled state' }
+		],
+		relatedComponents: ['Radio', 'Toggle'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'Radio',
+		slug: 'radio',
+		category: 'inputs',
+		title: 'Svelte 5 Radio – Option Selection',
+		description: 'Radio button for mutually exclusive options.',
+		useCase: 'Selection of one option from a set.',
+		keywords: ['form', 'input', 'radio'],
+		props: [
+			{ name: 'group', type: 'any', description: 'Bindable group value' },
+			{ name: 'value', type: 'any', description: 'Value of this option' }
+		],
+		relatedComponents: ['Checkbox', 'Select'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'TextArea',
+		slug: 'textarea',
+		category: 'inputs',
+		title: 'Svelte 5 TextArea – Multiline Input',
+		description: 'Resizable text area for longer content.',
+		useCase: 'Comments, descriptions, or raw data input.',
+		keywords: ['form', 'input', 'textarea'],
+		props: [
+			{ name: 'value', type: 'string', description: 'Bindable text value' },
+			{ name: 'rows', type: 'number', default: '3', description: 'Initial height in rows' }
+		],
+		relatedComponents: ['Input'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'Slider',
+		slug: 'slider',
+		category: 'inputs',
+		title: 'Svelte 5 Slider – Range Input',
+		description: 'Range slider with custom track and thumb styling.',
+		useCase: 'Selecting numeric values within a range (e.g., volume, brightness).',
+		keywords: ['form', 'input', 'range'],
+		props: [
+			{ name: 'value', type: 'number', description: 'Bindable value' },
+			{ name: 'min', type: 'number', default: '0', description: 'Minimum value' },
+			{ name: 'max', type: 'number', default: '100', description: 'Maximum value' }
+		],
+		relatedComponents: ['Input'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'Spinner',
+		slug: 'spinner',
+		category: 'feedback',
+		title: 'Svelte 5 Spinner – Loading Indicator',
+		description: 'CSS-only loading spinner with industrial size variants.',
+		useCase: 'Indicates loading state for async operations.',
+		keywords: ['loading', 'spinner', 'feedback'],
+		props: [
+			{ name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Spinner size' }
+		],
+		relatedComponents: ['Skeleton'],
+		showroomMode: 'feedback'
+	},
+	{
+		name: 'Alert',
+		slug: 'alert',
+		category: 'feedback',
+		title: 'Svelte 5 Alert – Contextual Feedback',
+		description: 'Color-coded alert box for success, warning, or error messages.',
+		useCase: 'Displaying critical system messages to the user.',
+		keywords: ['feedback', 'message', 'alert'],
+		props: [
+			{ name: 'variant', type: "'default' | 'destructive' | 'warning' | 'success'", default: "'default'", description: 'Alert style' }
+		],
+		relatedComponents: ['Toast'],
+		showroomMode: 'feedback'
+	},
+	{
+		name: 'Skeleton',
+		slug: 'skeleton',
+		category: 'feedback',
+		title: 'Svelte 5 Skeleton – Loading Placeholder',
+		description: 'Pulse animation for content skeletons.',
+		useCase: 'Reducing perceived latency during data fetching.',
+		keywords: ['loading', 'placeholder', 'skeleton'],
+		props: [
+			{ name: 'class', type: 'string', description: 'Dimensions and margin' }
+		],
+		relatedComponents: ['Spinner'],
+		showroomMode: 'feedback'
+	},
+	{
+		name: 'Tabs',
+		slug: 'tabs',
+		category: 'layout',
+		title: 'Svelte 5 Tabs – Tabbed Interface',
+		description: 'Tabbed navigation for switching between views.',
+		useCase: 'Organizing content into separate views without navigation.',
+		keywords: ['navigation', 'tabs', 'layout'],
+		props: [
+			{ name: 'items', type: 'TabItem[]', description: 'Array of tab items' },
+			{ name: 'defaultValue', type: 'string', description: 'Initially active tab' }
+		],
+		relatedComponents: ['Accordion'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Accordion',
+		slug: 'accordion',
+		category: 'layout',
+		title: 'Svelte 5 Accordion – Collapsible Sections',
+		description: 'Vertical list of collapsible headers.',
+		useCase: 'Managing vertically stacked content density.',
+		keywords: ['layout', 'collapse', 'accordion'],
+		props: [
+			{ name: 'items', type: 'AccordionItem[]', description: 'Content items' },
+			{ name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Expansion mode' }
+		],
+		relatedComponents: ['Tabs'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Modal',
+		slug: 'modal',
+		category: 'layout',
+		title: 'Svelte 5 Modal – Dialog Overlay',
+		description: 'Centered dialog overlay with backdrop blur.',
+		useCase: 'Critical interruptions or complex sub-tasks.',
+		keywords: ['overlay', 'dialog', 'modal'],
+		props: [
+			{ name: 'open', type: 'boolean', description: 'Visibility state' },
+			{ name: 'onclose', type: '() => void', description: 'Close handler' }
+		],
+		relatedComponents: ['Drawer'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Drawer',
+		slug: 'drawer',
+		category: 'layout',
+		title: 'Svelte 5 Drawer – Side Sheet',
+		description: 'Slide-in panel from left or right edge.',
+		useCase: 'Secondary actions, filtering, or details views.',
+		keywords: ['overlay', 'sidebar', 'drawer'],
+		props: [
+			{ name: 'open', type: 'boolean', description: 'Visibility state' },
+			{ name: 'side', type: "'left' | 'right'", default: "'right'", description: 'Drawer position' }
+		],
+		relatedComponents: ['Modal'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'Menu',
+		slug: 'menu',
+		category: 'layout',
+		title: 'Svelte 5 Menu – Dropdown Actions',
+		description: 'Dropdown menu triggered by a button.',
+		useCase: 'List of actions or navigation links.',
+		keywords: ['navigation', 'dropdown', 'menu'],
+		props: [
+			{ name: 'items', type: 'MenuItem[]', description: 'Menu items' },
+			{ name: 'trigger', type: 'Snippet', description: 'Trigger element' }
+		],
+		relatedComponents: ['Select'],
+		showroomMode: 'layout'
+	},
+	{
+		name: 'DatePicker',
+		slug: 'date-picker',
+		category: 'inputs',
+		title: 'Svelte 5 DatePicker – Date Input',
+		description: 'Styled native date input.',
+		useCase: 'Date selection.',
+		keywords: ['form', 'input', 'date'],
+		props: [
+			{ name: 'value', type: 'string', description: 'Date string YYYY-MM-DD' }
+		],
+		relatedComponents: ['Input'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'FileUpload',
+		slug: 'file-upload',
+		category: 'inputs',
+		title: 'Svelte 5 FileUpload – File Input',
+		description: 'Styled file input.',
+		useCase: 'Uploading documents or images.',
+		keywords: ['form', 'input', 'file'],
+		props: [
+			{ name: 'class', type: 'string', description: 'Styling classes' }
+		],
+		relatedComponents: ['Button'],
+		showroomMode: 'settings'
+	},
+	{
+		name: 'Stepper',
+		slug: 'stepper',
+		category: 'layout',
+		title: 'Svelte 5 Stepper – Progress Indicator',
+		description: 'Step progress visualization.',
+		useCase: 'Showing progress in multi-step workflows.',
+		keywords: ['progress', 'steps', 'workflow'],
+		props: [
+			{ name: 'steps', type: 'string[]', description: 'Step labels' },
+			{ name: 'currentStep', type: 'number', description: 'Active step index' }
+		],
+		relatedComponents: ['Meter'],
+		showroomMode: 'layout'
 	}
 ];
 
