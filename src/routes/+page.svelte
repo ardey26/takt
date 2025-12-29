@@ -1,42 +1,10 @@
 <script lang="ts">
 	import SchemaOrg from '$lib/components/seo/SchemaOrg.svelte';
 	import { generateSoftwareSchema } from '$lib/utils/generateMeta';
-	import { componentRegistry, categories } from '$lib/data/componentRegistry';
-	
-	import Button from '$lib/components/Button.svelte';
-	import Meter from '$lib/components/Meter.svelte';
-	import Toggle from '$lib/components/Toggle.svelte';
-	import Tag from '$lib/components/Tag.svelte';
-	import Ticker from '$lib/components/Ticker.svelte';
-	import Panel from '$lib/components/Panel.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import Select from '$lib/components/Select.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Divider from '$lib/components/Divider.svelte';
+	import { componentRegistry } from '$lib/data/componentRegistry';
+	import ComponentPreview from '$lib/components/ComponentPreview.svelte';
 	
 	const softwareSchema = generateSoftwareSchema();
-	
-	let toggleChecked = $state(true);
-	let currentPage = $state(3);
-	let inputValue = $state('');
-	let selectValue = $state('all');
-	let tickerValue = $state(2847.50);
-
-	const componentPreviews: Record<string, { render: boolean }> = {
-		'button': { render: true },
-		'meter': { render: true },
-		'toggle': { render: true },
-		'tag': { render: true },
-		'ticker': { render: true },
-		'panel': { render: true },
-		'input': { render: true },
-		'select': { render: true },
-		'pagination': { render: true },
-		'divider': { render: true },
-		'datatable': { render: false },
-		'toolbar': { render: false },
-		'avatar': { render: false },
-	};
 </script>
 
 <svelte:head>
@@ -100,71 +68,7 @@
 					href="/components/{component.category}/{component.slug}"
 					class="bg-bone p-4 hover:bg-stone-100 transition-colors group flex flex-col"
 				>
-					<div class="flex-1 flex items-center justify-center min-h-16 mb-3">
-						{#if component.slug === 'button'}
-							<Button label="OK" class="scale-90 pointer-events-none" />
-						{:else if component.slug === 'meter'}
-							<Meter value={65} compact />
-						{:else if component.slug === 'toggle'}
-							<Toggle checked={toggleChecked} class="pointer-events-none" />
-						{:else if component.slug === 'tag'}
-							<Tag variant="in-stock" label="Ready" />
-						{:else if component.slug === 'ticker'}
-							<div class="text-center">
-								<span class="font-mono text-lg font-bold text-matte tabular-nums">$2,847</span>
-								<span class="font-mono text-[10px] text-matte/40 block">+2.3%</span>
-							</div>
-						{:else if component.slug === 'panel'}
-							<div class="slot px-3 py-2 rounded-sm">
-								<span class="font-mono text-[10px] text-matte/50">Panel</span>
-							</div>
-						{:else if component.slug === 'input'}
-							<div class="w-full max-w-24">
-								<Input placeholder="..." class="pointer-events-none [&>input]:h-7 [&>input]:text-[10px]" />
-							</div>
-						{:else if component.slug === 'select'}
-							<div class="slot px-3 py-1.5 rounded-sm flex items-center gap-1">
-								<span class="font-mono text-[10px] text-matte/60">All</span>
-								<svg class="w-2.5 h-2.5 text-matte/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-								</svg>
-							</div>
-						{:else if component.slug === 'pagination'}
-							<div class="flex gap-1">
-								<span class="font-mono text-[10px] text-matte/30">‹</span>
-								<span class="font-mono text-[10px] text-matte/60">1</span>
-								<span class="font-mono text-[10px] text-signal font-bold">2</span>
-								<span class="font-mono text-[10px] text-matte/60">3</span>
-								<span class="font-mono text-[10px] text-matte/30">›</span>
-							</div>
-						{:else if component.slug === 'divider'}
-							<div class="w-full border-t border-stone-300"></div>
-						{:else if component.slug === 'datatable'}
-							<div class="w-full border border-stone-300 rounded-sm overflow-hidden">
-								<div class="grid grid-cols-4 gap-px bg-stone-300 text-[8px]">
-									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">☑</div>
-									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">SKU</div>
-									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">Stock</div>
-									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">Status</div>
-									<div class="bg-bone px-1 py-0.5 font-mono text-matte/40">☐</div>
-									<div class="bg-bone px-1 py-0.5 font-mono text-matte/60">A-01</div>
-									<div class="bg-bone px-1 py-0.5"><Meter value={72} compact class="scale-50 origin-left" /></div>
-									<div class="bg-bone px-1 py-0.5"><span class="text-[6px] text-green-700">●</span></div>
-								</div>
-							</div>
-						{:else if component.slug === 'toolbar'}
-							<div class="flex gap-px w-full">
-								<div class="flex-1 bg-stone-200 h-5 rounded-l-sm"></div>
-								<div class="w-8 bg-signal h-5 rounded-r-sm"></div>
-							</div>
-						{:else if component.slug === 'avatar'}
-							<div class="w-8 h-8 rounded-full bg-stone-300 flex items-center justify-center">
-								<span class="font-mono text-[10px] text-matte/50">AB</span>
-							</div>
-						{:else}
-							<span class="font-mono text-[10px] text-matte/30">{component.name}</span>
-						{/if}
-					</div>
+					<ComponentPreview slug={component.slug} name={component.name} class="flex-1 mb-3" />
 					
 					<span class="font-mono text-xs text-matte group-hover:text-signal transition-colors">
 						{component.name}
