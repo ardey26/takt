@@ -13,7 +13,7 @@
 	<meta name="keywords" content="Svelte UI library, Svelte 5 runes, industrial design, Dieter Rams, component library" />
 	<meta property="og:title" content="Takt – Svelte 5 Component Library" />
 	<meta property="og:description" content="Industrial UI components. Less, but better." />
-	<link rel="canonical" href="https://takt.ui" />
+	<link rel="canonical" href="https://takt-ui.app" />
 </svelte:head>
 
 <SchemaOrg schema={softwareSchema} />
