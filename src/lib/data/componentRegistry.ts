@@ -273,6 +273,40 @@ export const componentRegistry: ComponentMeta[] = [
 		],
 		relatedComponents: ['Tag', 'Panel'],
 		showroomMode: 'settings'
+	},
+	{
+		name: 'Plot',
+		slug: 'plot',
+		category: 'data-display',
+		title: 'Svelte 5 Micro-Chart – Data Visualization',
+		description: 'SVG-based step charts and bar histograms. Pure CSS styling with no client-side charting libraries. Ideal for sparklines.',
+		useCase: 'Designed for high-performance sparklines and data previews. Zero-dependency implementation ensures instant loading and perfect scaling.',
+		keywords: ['svelte charts svg', 'sparklines svelte', 'dashboard analytics'],
+		props: [
+			{ name: 'data', type: 'PlotDataPoint[]', default: '[]', description: 'Array of data points { label, value }' },
+			{ name: 'type', type: "'bar' | 'step'", default: "'bar'", description: 'Chart visualization type' },
+			{ name: 'height', type: 'number', default: '120', description: 'Chart height in pixels' },
+			{ name: 'class', type: 'string', description: 'Additional CSS classes' }
+		],
+		relatedComponents: ['Ticker', 'Panel'],
+		showroomMode: 'ledger',
+		showroomHighlight: 'plot'
+	},
+	{
+		name: 'Period Selector',
+		slug: 'period-selector',
+		category: 'inputs',
+		title: 'Svelte 5 Period Selector – Segmented Control',
+		description: 'Physical radio-button style segmented control for time range selection. Tactile feedback with active state handling.',
+		useCase: 'Provides immediate time-span switching for financial charts. The physical button aesthetic gives clear affordance for interaction.',
+		keywords: ['segmented control svelte', 'radio group styling', 'financial dashboard ui'],
+		props: [
+			{ name: 'value', type: 'string', default: "'1D'", description: 'Bindable selected value' },
+			{ name: 'options', type: 'string[]', default: "['1H', '1D', '1W', '1M']", description: 'Array of option labels' },
+			{ name: 'class', type: 'string', description: 'Additional CSS classes' }
+		],
+		relatedComponents: ['Plot', 'Toolbar'],
+		showroomMode: 'ledger'
 	}
 ];
 
