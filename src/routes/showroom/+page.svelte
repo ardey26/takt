@@ -5,16 +5,15 @@
 	import ModeSelector from '$lib/components/ModeSelector.svelte';
 	import LogisticsView from '$lib/components/views/LogisticsView.svelte';
 	import LedgerView from '$lib/components/views/LedgerView.svelte';
-	import SettingsView from '$lib/components/views/SettingsView.svelte';
+	import FormsView from '$lib/components/views/FormsView.svelte';
 	import DevOpsView from '$lib/components/views/DevOpsView.svelte';
 
-	// Get mode from URL query param, default to 'logistics'
 	let currentMode = $derived($page.url.searchParams.get('mode') || 'logistics');
 
 	const modeLabels: Record<string, string> = {
 		'logistics': 'Logistics',
 		'ledger': 'Ledger',
-		'settings': 'Switchboard',
+		'forms': 'Forms',
 		'devops': 'DevOps'
 	};
 
@@ -55,8 +54,8 @@
 	<LogisticsView />
 {:else if currentMode === 'ledger'}
 	<LedgerView />
-{:else if currentMode === 'settings'}
-	<SettingsView />
+{:else if currentMode === 'forms'}
+	<FormsView />
 {:else if currentMode === 'devops'}
 	<DevOpsView />
 {:else}
