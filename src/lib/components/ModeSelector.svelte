@@ -18,7 +18,7 @@
 		modes = [
 			{ id: 'logistics', label: 'Logistics', number: '01' },
 			{ id: 'ledger', label: 'Ledger', number: '02' },
-			{ id: 'settings', label: 'Switchboard', number: '03' },
+			{ id: 'forms', label: 'Forms', number: '03' },
 			{ id: 'devops', label: 'DevOps', number: '04' },
 		],
 		value = 'logistics',
