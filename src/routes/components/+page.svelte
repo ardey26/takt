@@ -15,7 +15,7 @@
 			'@type': 'ListItem',
 			'position': index + 1,
 			'name': cat.label,
-			'url': `https://takt.ui/components/${cat.slug}`
+			'url': `https://takt-ui.app/components/${cat.slug}`
 		}))
 	};
 </script>

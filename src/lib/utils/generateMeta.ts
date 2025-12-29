@@ -9,7 +9,7 @@ export interface PageMeta {
 	canonical: string;
 }
 
-const BASE_URL = 'https://takt.ui';
+const BASE_URL = 'https://takt-ui.app';
 const BRAND = 'Takt';
 const TAGLINE = 'Svelte 5 & Tailwind Industrial UI';
 
