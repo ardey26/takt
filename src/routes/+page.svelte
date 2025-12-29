@@ -140,13 +140,17 @@
 						{:else if component.slug === 'divider'}
 							<div class="w-full border-t border-stone-300"></div>
 						{:else if component.slug === 'datatable'}
-							<div class="grid grid-cols-3 gap-px bg-stone-300 w-full">
-								<div class="bg-bone h-3"></div>
-								<div class="bg-bone h-3"></div>
-								<div class="bg-bone h-3"></div>
-								<div class="bg-bone h-3"></div>
-								<div class="bg-bone h-3"></div>
-								<div class="bg-bone h-3"></div>
+							<div class="w-full border border-stone-300 rounded-sm overflow-hidden">
+								<div class="grid grid-cols-4 gap-px bg-stone-300 text-[8px]">
+									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">☑</div>
+									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">SKU</div>
+									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">Stock</div>
+									<div class="bg-[#E6E6E2] px-1 py-0.5 font-mono text-matte/50">Status</div>
+									<div class="bg-bone px-1 py-0.5 font-mono text-matte/40">☐</div>
+									<div class="bg-bone px-1 py-0.5 font-mono text-matte/60">A-01</div>
+									<div class="bg-bone px-1 py-0.5"><Meter value={72} compact class="scale-50 origin-left" /></div>
+									<div class="bg-bone px-1 py-0.5"><span class="text-[6px] text-green-700">●</span></div>
+								</div>
 							</div>
 						{:else if component.slug === 'toolbar'}
 							<div class="flex gap-px w-full">
